@@ -17,11 +17,6 @@
 @property (nonatomic)NSURL* url;
 
 /**
- *  embed webView
- */
-@property (nonatomic)UIWebView* webView;
-
-/**
  *  tint color of progress view
  */
 @property (nonatomic)UIColor* progressViewColor;
@@ -35,6 +30,14 @@
  */
 -(instancetype)initWithUrl:(NSURL*)url;
 
+///是否根据视图大小来缩放页面  默认为YES
+@property (nonatomic) BOOL scalesPageToFit;
+
+///加载失败是否可以刷新  默认为YES
+@property (nonatomic) BOOL isCanReload;
+
+///网页中是否支持手势滑动  默认为YES
+@property (nonatomic) BOOL isCanPopGestureRecognizer;
 
 -(void)reloadWebView;
 

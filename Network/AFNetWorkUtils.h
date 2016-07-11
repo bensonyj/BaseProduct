@@ -30,15 +30,21 @@ typedef NS_ENUM(NSUInteger, NetworkRequestGraceTimeType){
 
 - (RACSignal *)startMonitoringNet;
 
++ (RACSignal *)racPOSTImageWithURL:(NSString *)url params:(NSDictionary *)params data:(NSData *)data name:(NSString *)name;
+
 + (RACSignal *)racPOSTWthURL:(NSString *)url params:(NSDictionary *)params;
 
 + (RACSignal *)racPOSTWithURL:(NSString *)url params:(NSDictionary *)params class:(Class)clazz;
 
-+ (RACSignal *)racGETUNJSONWthURL:(NSString *)url;
++ (RACSignal *)racGETUNJSONWthURL:(NSString *)url params:(NSDictionary *)params;
 
-+ (RACSignal *)racGETWthURL:(NSString *)url;
++ (RACSignal *)racGETWthURL:(NSString *)url params:(NSDictionary *)params;
 
-+ (RACSignal *)racGETWithURL:(NSString *)url class:(Class)clazz;
++ (RACSignal *)racGETWithURL:(NSString *)url params:(NSDictionary *)params class:(Class)clazz;
+
+#pragma mark - 直接解析错误信息
+
++ (NSString *)errorMessage:(NSError *)error;
 
 #pragma mark 显示信息
 //显示1秒自动消失

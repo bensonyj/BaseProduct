@@ -129,6 +129,65 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
 #pragma mark -RAC
 
 /**
+ *  转换成响应式请求 可重用 上传文件到指定服务器
+ *
+ *  @param url    请求地址
+ *  @param params 请求参数
+ *
+ *  @return 带请求结果（字典）的信号
+ */
++ (RACSignal *)racPOSTImageWithURL:(NSString *)url params:(NSDictionary *)params data:(NSData *)data name:(NSString *)name{
+    if ([AFNetWorkUtils sharedAFNetWorkUtils].netType == NONet) {
+        return [self getNoNetSignal];
+    }
+    
+    //判断是否需要显示hud
+    BOOL isNeedHud = YES;
+    if ([url isEqualToString:@""]) {
+        isNeedHud = NO;
+    }
+    
+    url = [kAPIURL stringByAppendingString:url];
+    
+    
+    NSLog(@"<%@: %p> -postImage2racWthURL: %@, params: %@", self.class, self, url, params);
+    
+    return [[RACSignal createSignal:^RACDisposable *(id <RACSubscriber> subscriber) {
+        
+        NetworkRequestGraceTimeType type = isNeedHud ? NetworkRequestGraceTimeTypeNormal : NetworkRequestGraceTimeTypeNone;
+        MBProgressHUD *hud = [self hud:type];
+        
+        AFHTTPSessionManager *manager = [self sharedHTTPOperationManager];
+        
+        NSURLSessionDataTask *operation = [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            //把要上传的文件转成NSData
+            //NSString*path=[[NSBundlemainBundle]pathForResource:@"123"ofType:@"txt"];
+            //NSData*fileData = [NSDatadataWithContentsOfFile:path];
+            //            [formData appendPartWithFileData:data name:name fileName:@"file" mimeType:@"image/jpeg"];//给定数据流的数据名，文件名，文件类型（以图片为例）
+            [formData appendPartWithFileData:data name:name fileName:@"file" mimeType:@"application/octet-stream"];//给定数据流的数据名，文件名，文件类型（以图片为例）
+        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            hud.taskInProgress = NO;
+            [hud hide:YES];
+            
+            [self handleResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation responseObject:responseObject];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // 任务结束，设置状态
+            hud.taskInProgress = NO;
+            [hud hide:YES];
+            [self handleErrorResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation error:error];
+        }];
+        
+        return [RACDisposable disposableWithBlock:^{
+            // 任务结束，设置状态
+            hud.taskInProgress = NO;
+            [hud hide:YES];
+            
+            [operation cancel];
+        }];
+    }] setNameWithFormat:@"<%@: %p> -postImage2racWthURL: %@, params: %@", self.class, self, url, params];
+}
+
+/**
  *  转换成响应式请求 可重用
  *
  *  @param url   请求地址
@@ -142,20 +201,31 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     }
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:2];
-    [dict setObject:params forKey:@"body"];
-    [dict setObject:[self baseParamsDict] forKey:@"header"];
+    
+//    这里组装body看API需求
+//    1.
+//    [dict addEntriesFromDictionary:[self baseParamsDict]];
+//    if (params) {
+//        [dict addEntriesFromDictionary:params];
+//    }
+    
+//    2.
+//    [dict setObject:params forKey:@"body"];
+//    [dict setObject:[self baseParamsDict] forKey:@"header"];
     
     url = [kAPIURL stringByAppendingString:url];
     
     NSLog(@"<%@: %p> -post2racWthURL: %@, params: %@", self.class, self, url, params);
     
+    
+    BOOL isNeedHud = YES;
+    if ([url isEqualToString:@""]) {
+        isNeedHud = NO;
+    }
+
     return [[RACSignal createSignal:^RACDisposable *(id <RACSubscriber> subscriber) {
-        
-        NetworkRequestGraceTimeType type = NetworkRequestGraceTimeTypeNormal;
+        NetworkRequestGraceTimeType type = isNeedHud ? NetworkRequestGraceTimeTypeNormal : NetworkRequestGraceTimeTypeNone;
         // 获取转圈控件,默认若是0.5秒数据返回则不显示转圈
-//        if ([url isEqualToString:[hostUrl stringByAppendingString:getStartPic]] || [url isEqualToString:[hostUrl stringByAppendingString:rechargeApple]]) {
-//            type = NetworkRequestGraceTimeTypeNone;
-//        }
         MBProgressHUD *hud = [self hud:type];
         
         AFHTTPSessionManager *manager = [self sharedHTTPOperationManager];
@@ -181,18 +251,37 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     }] setNameWithFormat:@"<%@: %p> -post2racWthURL: %@, params: %@", self.class, self, url, params];
 }
 
-+ (RACSignal *)racGETWthURL:(NSString *)url {
-    return [[self racGETWthURL:url isJSON:YES] setNameWithFormat:@"<%@: %p> -get2racWthURL: %@", self.class, self, url];
++ (RACSignal *)racGETWthURL:(NSString *)url params:(NSDictionary *)params{
+    return [[self racGETWthURL:url isJSON:YES params:params] setNameWithFormat:@"<%@: %p> -get2racWthURL: %@", self.class, self, url];
 }
 
-+ (RACSignal *)racGETUNJSONWthURL:(NSString *)url {
-    return [[self racGETWthURL:url isJSON:NO] setNameWithFormat:@"<%@: %p> -get2racUNJSONWthURL: %@", self.class, self, url];
++ (RACSignal *)racGETUNJSONWthURL:(NSString *)url params:(NSDictionary *)params{
+    return [[self racGETWthURL:url isJSON:NO params:params] setNameWithFormat:@"<%@: %p> -get2racUNJSONWthURL: %@", self.class, self, url];
 }
 
-+ (RACSignal *)racGETWthURL:(NSString *)url isJSON:(BOOL)isJSON {
++ (RACSignal *)racGETWthURL:(NSString *)url isJSON:(BOOL)isJSON params:(NSDictionary *)params {
     if ([AFNetWorkUtils sharedAFNetWorkUtils].netType == NONet) {
         return [self getNoNetSignal];
     }
+    
+    NSLog(@"%@",url);
+    //判断是否需要显示hud
+    BOOL isNeedHud = YES;
+    if ([url isEqualToString:@""]) {
+        isNeedHud = NO;
+    }
+    
+    //组织get请求
+    NSMutableArray *paramArray = [[NSMutableArray alloc] initWithCapacity:1];
+    for (NSString *key in params.allKeys) {
+        [paramArray addObject:[NSString stringWithFormat:@"%@=%@",key,params[key]]];
+    }
+    NSString *paramString = [paramArray componentsJoinedByString:@"&"];
+    
+    url = [NSString stringWithFormat:@"%@%@?%@",kAPIURL,url,paramString];
+    
+    NSLog(@"<%@: %p> -get2racWthURL: %@, params: %@", self.class, self, url, params);
+
     return [RACSignal createSignal:^RACDisposable *(id <RACSubscriber> subscriber) {
         AFHTTPSessionManager *manager = [self sharedHTTPOperationManager];
         if (!isJSON) {
@@ -243,12 +332,12 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
 }
 
 
-+ (RACSignal *)racGETWithURL:(NSString *)url class:(Class)clazz {
++ (RACSignal *)racGETWithURL:(NSString *)url params:(NSDictionary *)params class:(Class)clazz {
     if ([AFNetWorkUtils sharedAFNetWorkUtils].netType == NONet) {
         return [self getNoNetSignal];
     }
     //有网络
-    return [[[[self racGETWthURL:url] map:^id(id responseObject) {
+    return [[[[self racGETWthURL:url params:params] map:^id(id responseObject) {
         if ([responseObject isKindOfClass:[NSArray class]]) {
             return [clazz mj_objectArrayWithKeyValuesArray:responseObject];
         } else {
@@ -313,6 +402,11 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     
 }
 
++ (NSString *)errorMessage:(NSError *)error
+{
+    return [error.userInfo objectForKey:customErrorInfoKey];
+}
+
 #pragma mark - hud延时弹框
 
 + (MBProgressHUD *)hud:(NetworkRequestGraceTimeType)graceTimeType{
@@ -371,7 +465,7 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     }
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = text;
+    hud.detailsLabelText = text;
     // 再设置模式
     hud.mode = MBProgressHUDModeCustomView;
     
