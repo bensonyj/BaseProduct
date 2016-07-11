@@ -14,10 +14,6 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 
 @interface BaseTableViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
-{
-    RefreshType         refreshStatus;
-    NSInteger           perPageCount;
-}
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 /** 当前视图数组 */
@@ -28,6 +24,11 @@ static NSString *CellIdentifier = @"CellIdentifier";
 /** 上拉加载 */
 @property (nonatomic, strong) MJRefreshAutoNormalFooter *footer;
 
+
+/** 刷新状态 */
+@property (nonatomic, assign) RefreshType  refreshStatus;
+/** 限制每次获取数据条数，默认为10 */
+@property (nonatomic, assign) NSInteger perPageCount;
 /** 接收到数据量 */
 @property (nonatomic, assign) NSInteger receiveCount;
 /** 当前存在的数据量 */

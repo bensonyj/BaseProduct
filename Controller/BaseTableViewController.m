@@ -25,14 +25,14 @@
     // Do any additional setup after loading the view.
     
     self.existCount = 0;
-    refreshStatus = refreshType_Normal;
+    self.refreshStatus = refreshType_Normal;
     self.showFooterView = YES;
     self.dataList = [NSMutableArray array];
     self.tableView.backgroundColor = self.view.backgroundColor;
     self.tableView.backgroundView = nil;
     
     //设置默认加载条数
-    perPageCount = 15;
+    self.perPageCount = 15;
     //开始加载数据页码
     self.startPage = 1;
     
@@ -40,50 +40,28 @@
     @weakify(self);
     [RACObserve(self, receiveCount) subscribeNext:^(NSNumber *value) {
         @strongify(self);
-        if([value integerValue] < perPageCount){
+        if([value integerValue] < _perPageCount){
             //没有更多
             [self removeRefreshFooter];
         }
-        else if ([value integerValue] == perPageCount && [value integerValue]>0){
+        else if ([value integerValue] == _perPageCount && [value integerValue]>0){
             [self configureRefreshFooter:self.header.scrollView];
-            self.startPage ++;
-            self.isMore = YES;
-            _footer.hidden = NO;
         }
     }];
 }
 
 - (void)configureRefreshHeader:(UIScrollView *)tableView
 {
-    if(!_header)
-    {
-        @weakify(self);
-        _header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            @strongify(self);
-            // 进入刷新状态后会自动调用这个block
-            refreshStatus = refreshType_PullDown;
-            [self refreshData];
-        }];
-        // 设置自动切换透明度(在导航栏下面自动隐藏)
-        _header.automaticallyChangeAlpha = YES;
-        // 隐藏时间
-        _header.lastUpdatedTimeLabel.hidden = YES;
-        tableView.mj_header = _header;
-    }
+    tableView.mj_header = self.header;
 }
 
 - (void)configureRefreshFooter:(UIScrollView *)tableView
 {
-    if(!_footer && self.showFooterView){
-        @weakify(self);
-        _footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            @strongify(self);
-            // 进入刷新状态后会自动调用这个block
-            refreshStatus = refreshType_PullUp;
-            [self refreshData];
-        }];
-        tableView.mj_footer = _footer;
-    }
+    self.startPage ++;
+    self.isMore = YES;
+    
+    tableView.mj_footer = self.footer;
+    _footer.hidden = NO;
 }
 
 - (void)removeRefreshFooter
@@ -95,7 +73,7 @@
 //刷新数据
 - (void)refreshData
 {
-    switch (refreshStatus) {
+    switch (_refreshStatus) {
         case refreshType_Normal:
             self.startPage = 1;
             break;
@@ -120,7 +98,7 @@
 - (void)endDataRefresh
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        refreshStatus = refreshType_Normal;
+        self.refreshStatus = refreshType_Normal;
         [_footer endRefreshing];
         [_header endRefreshing];
         
@@ -128,6 +106,41 @@
             [_footer endRefreshingWithNoMoreData];
         }
     });
+}
+
+- (MJRefreshNormalHeader *)header
+{
+    if(!_header)
+    {
+        @weakify(self);
+        _header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            @strongify(self);
+            // 进入刷新状态后会自动调用这个block
+            self.refreshStatus = refreshType_PullDown;
+            [self refreshData];
+        }];
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        _header.automaticallyChangeAlpha = YES;
+        // 隐藏时间
+        _header.lastUpdatedTimeLabel.hidden = YES;
+    }
+
+    return _header;
+}
+
+- (MJRefreshAutoNormalFooter *)footer
+{
+    if(!_footer && self.showFooterView){
+        @weakify(self);
+        _footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            @strongify(self);
+            // 进入刷新状态后会自动调用这个block
+            self.refreshStatus = refreshType_PullUp;
+            [self refreshData];
+        }];
+    }
+
+    return _footer;
 }
 
 - (NSArray *)noDuplicateListWithadditionList:(NSArray *)addition

@@ -52,6 +52,7 @@
 		C6E0E60B1D336F6100F8CF09 /* AreaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E60A1D336F6100F8CF09 /* AreaInfo.m */; };
 		C6E0E60D1D336F7F00F8CF09 /* cityArea.db in Resources */ = {isa = PBXBuildFile; fileRef = C6E0E60C1D336F7F00F8CF09 /* cityArea.db */; };
 		C6E0E6101D33905A00F8CF09 /* NetJson.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E60F1D33905A00F8CF09 /* NetJson.m */; };
+		C6E0E6131D33B14E00F8CF09 /* BaseHUDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E6121D33B14E00F8CF09 /* BaseHUDViewController.m */; };
 		C6F5D95E1C4FBEEA009240CE /* NSData+BeeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D9471C4FBEEA009240CE /* NSData+BeeExtension.m */; };
 		C6F5D95F1C4FBEEA009240CE /* NSDate+BeeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D9491C4FBEEA009240CE /* NSDate+BeeExtension.m */; };
 		C6F5D9601C4FBEEA009240CE /* NSNull+InternalNullExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D94B1C4FBEEA009240CE /* NSNull+InternalNullExtention.m */; };
@@ -180,6 +181,8 @@
 		C6E0E60C1D336F7F00F8CF09 /* cityArea.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = cityArea.db; sourceTree = "<group>"; };
 		C6E0E60E1D33905A00F8CF09 /* NetJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetJson.h; sourceTree = "<group>"; };
 		C6E0E60F1D33905A00F8CF09 /* NetJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetJson.m; sourceTree = "<group>"; };
+		C6E0E6111D33B14E00F8CF09 /* BaseHUDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHUDViewController.h; sourceTree = "<group>"; };
+		C6E0E6121D33B14E00F8CF09 /* BaseHUDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHUDViewController.m; sourceTree = "<group>"; };
 		C6F5D9461C4FBEEA009240CE /* NSData+BeeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BeeExtension.h"; sourceTree = "<group>"; };
 		C6F5D9471C4FBEEA009240CE /* NSData+BeeExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BeeExtension.m"; sourceTree = "<group>"; };
 		C6F5D9481C4FBEEA009240CE /* NSDate+BeeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BeeExtension.h"; sourceTree = "<group>"; };
@@ -412,6 +415,8 @@
 				39D591B51C4E46BF0022D37A /* BaseViewController.m */,
 				39D591B71C4F1F110022D37A /* BaseTableViewController.h */,
 				39D591B81C4F1F110022D37A /* BaseTableViewController.m */,
+				C6E0E6111D33B14E00F8CF09 /* BaseHUDViewController.h */,
+				C6E0E6121D33B14E00F8CF09 /* BaseHUDViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 				C6F5D9671C4FBEEA009240CE /* UITabBarController+HideTabBar.m in Sources */,
 				C6E0E6081D336ECA00F8CF09 /* UserInfo.m in Sources */,
 				3982F3641CB7AB370010D270 /* TimerHelper.m in Sources */,
+				C6E0E6131D33B14E00F8CF09 /* BaseHUDViewController.m in Sources */,
 				3982F35D1CB7AB370010D270 /* JXTAlertTools.m in Sources */,
 				3914CC251C4C92DF00CA4B4A /* main.m in Sources */,
 				C6F5D97C1C4FBFCA009240CE /* ChineseString.m in Sources */,
