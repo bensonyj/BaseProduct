@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "ReactiveCocoa.h"
 #import "NSErrorHelper.h"
+#import "NetJson.h"
+
 @class MBProgressHUD;
 
 typedef NS_ENUM(NSInteger, NetType) {

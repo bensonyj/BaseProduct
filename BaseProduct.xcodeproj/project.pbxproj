@@ -51,6 +51,7 @@
 		C6E0E6081D336ECA00F8CF09 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E6071D336ECA00F8CF09 /* UserInfo.m */; };
 		C6E0E60B1D336F6100F8CF09 /* AreaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E60A1D336F6100F8CF09 /* AreaInfo.m */; };
 		C6E0E60D1D336F7F00F8CF09 /* cityArea.db in Resources */ = {isa = PBXBuildFile; fileRef = C6E0E60C1D336F7F00F8CF09 /* cityArea.db */; };
+		C6E0E6101D33905A00F8CF09 /* NetJson.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E60F1D33905A00F8CF09 /* NetJson.m */; };
 		C6F5D95E1C4FBEEA009240CE /* NSData+BeeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D9471C4FBEEA009240CE /* NSData+BeeExtension.m */; };
 		C6F5D95F1C4FBEEA009240CE /* NSDate+BeeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D9491C4FBEEA009240CE /* NSDate+BeeExtension.m */; };
 		C6F5D9601C4FBEEA009240CE /* NSNull+InternalNullExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F5D94B1C4FBEEA009240CE /* NSNull+InternalNullExtention.m */; };
@@ -177,6 +178,8 @@
 		C6E0E6091D336F6100F8CF09 /* AreaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaInfo.h; sourceTree = "<group>"; };
 		C6E0E60A1D336F6100F8CF09 /* AreaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaInfo.m; sourceTree = "<group>"; };
 		C6E0E60C1D336F7F00F8CF09 /* cityArea.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = cityArea.db; sourceTree = "<group>"; };
+		C6E0E60E1D33905A00F8CF09 /* NetJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetJson.h; sourceTree = "<group>"; };
+		C6E0E60F1D33905A00F8CF09 /* NetJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetJson.m; sourceTree = "<group>"; };
 		C6F5D9461C4FBEEA009240CE /* NSData+BeeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BeeExtension.h"; sourceTree = "<group>"; };
 		C6F5D9471C4FBEEA009240CE /* NSData+BeeExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BeeExtension.m"; sourceTree = "<group>"; };
 		C6F5D9481C4FBEEA009240CE /* NSDate+BeeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BeeExtension.h"; sourceTree = "<group>"; };
@@ -449,6 +452,8 @@
 				3982F3401CB7A6190010D270 /* IPAddress.h */,
 				3982F3411CB7A6190010D270 /* IPAddress.m */,
 				3982F3421CB7A6190010D270 /* Urls.h */,
+				C6E0E60E1D33905A00F8CF09 /* NetJson.h */,
+				C6E0E60F1D33905A00F8CF09 /* NetJson.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -786,6 +791,7 @@
 				39D591B31C4E46430022D37A /* BaseNavigationController.m in Sources */,
 				3982F3601CB7AB370010D270 /* NJKWebViewProgress.m in Sources */,
 				3982F3431CB7A6190010D270 /* IPAddress.m in Sources */,
+				C6E0E6101D33905A00F8CF09 /* NetJson.m in Sources */,
 				3982F35F1CB7AB370010D270 /* YJLanuchAdMonitor.m in Sources */,
 				3982F35C1CB7AB370010D270 /* YJAlertView.m in Sources */,
 				399FD28C1C507E8B00E6A936 /* NSDictionary+SCAddition.m in Sources */,

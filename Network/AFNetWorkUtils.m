@@ -372,34 +372,25 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     //在此根据自己应用的接口进行统一处理
     
     NSLog(@"url:%@,params:%@",operation.originalRequest.URL,responseObject);
-    NSDictionary *headerDic = [responseObject objectForKey:@"header"];
-    NSDictionary *resultDic = headerDic[@"ret_result"];
     
-    if ([resultDic[@"ret_code"] integerValue] == 0) {
-        //正确返回，信息正确
-//        if ([operation.originalRequest.URL isEqual:[NSURL URLWithString:[hostUrl stringByAppendingString:loginUrl]]]) {
-//            //如果是登陆则将header一并返回。需要获取header中的token_id
-//            [subscriber sendNext:responseObject];
-//        }else{
-            [subscriber sendNext:responseObject[@"body"]];
-//        }
-        [subscriber sendCompleted];
+    NetJson *netJson = [[NetJson alloc] initWithDict:responseObject];
+    if (netJson.code == 0) {
+        [subscriber sendNext:netJson];
     }else{
-        //正确返回，带有错误信息
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
         userInfo[operationInfoKey] = operation;
-        NSString *errorInfo = ([resultDic[@"ret_code"] integerValue] != 0 ? resultDic[@"ret_msg"] : @"请求没有得到处理");
+        NSString *errorInfo = netJson.msg;
         userInfo[customErrorInfoKey] = errorInfo;
-        NSError * error = [NSErrorHelper createErrorWithUserInfo:userInfo domain:netWorkUtilsDomain];
+        NSError *error = [NSErrorHelper createErrorWithUserInfo:userInfo domain:netWorkUtilsDomain];
         
-//        if ([resultDic[@"ret_code"] integerValue] == 65546) {
-//            //登录过期
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationLoginTimeout object:nil];
-//        }
-        
+        if (netJson.code == 10001) {
+            //登录超时或者多设备登录
+            //可以用通知通知根视图
+            //[[NSNotificationCenter defaultCenter] postNotificationName:NotificationLoginTimeout object:nil];
+        }
+
         [subscriber sendError:error];
     }
-    
 }
 
 + (NSString *)errorMessage:(NSError *)error
