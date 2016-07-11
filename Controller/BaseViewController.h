@@ -15,6 +15,8 @@
     NSInteger topHeight;
 }
 
+/** 无数据时button事件 */
+@property (nonatomic, copy) void(^buttonClick)(NSString *title);
 
 - (void)customBackBarButtonItem;
 - (void)backBarButtonItemClick:(UIBarButtonItem *)barItem;
@@ -26,5 +28,38 @@
  *  @brief  获取、刷新数据
  */
 - (void)refreshData;
+
+/**
+ *  页面加载
+ */
+- (void)showDataLoadingView;
+/**
+ *  隐藏加载
+ */
+- (void)dismissDataLoadingView;
+
+/**
+ *  显示无网络提示
+ */
+- (void)showNotNetView;
+
+/**
+ *  隐藏无网络提示
+ */
+- (void)dismissNotNetView;
+
+/**
+ *  无数据时调用
+ *
+ *  @param imageName  显示的图片
+ *  @param tipsArray  显示的内容提示数组
+ *  @param titleArray 显示的按钮文字数组
+ */
+- (void)noDataShowImage:(NSString *)imageName tipsArray:(NSArray *)tipsArray buttonTitleArray:(NSArray *)titleArray;
+
+/**
+ *  有数据时调用
+ */
+- (void)hideNoDataView;
 
 @end

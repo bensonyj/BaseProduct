@@ -43,7 +43,8 @@
 		39D591B91C4F1F110022D37A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D591B81C4F1F110022D37A /* BaseTableViewController.m */; };
 		39DFBF071C605251000F2C88 /* AFNetWorkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DFBF041C605251000F2C88 /* AFNetWorkUtils.m */; };
 		39DFBF081C605251000F2C88 /* NSErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DFBF061C605251000F2C88 /* NSErrorHelper.m */; };
-		C6E0E5E11D336C8700F8CF09 /* TimerHelper in Resources */ = {isa = PBXBuildFile; fileRef = C6E0E5E01D336C8700F8CF09 /* TimerHelper */; };
+		C66703981D33E823007C8C3D /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66703971D33E823007C8C3D /* FeHourGlass.m */; };
+		C667039C1D33E836007C8C3D /* TimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C667039B1D33E836007C8C3D /* TimerHelper.m */; };
 		C6E0E6021D336EC200F8CF09 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FB1D336EC200F8CF09 /* LocationManager.m */; };
 		C6E0E6031D336EC200F8CF09 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FD1D336EC200F8CF09 /* LoginManager.m */; };
 		C6E0E6041D336EC200F8CF09 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FF1D336EC200F8CF09 /* SQLManager.m */; };
@@ -165,7 +166,10 @@
 		5ABD3A01D9B20A4282995257 /* Pods-BaseProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProduct/Pods-BaseProduct.release.xcconfig"; sourceTree = "<group>"; };
 		6F5384714F3C2B767443CD32 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE23F72AF9321C9121695033 /* libPods-BaseProduct.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseProduct.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6E0E5E01D336C8700F8CF09 /* TimerHelper */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TimerHelper; sourceTree = "<group>"; };
+		C66703961D33E823007C8C3D /* FeHourGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeHourGlass.h; sourceTree = "<group>"; };
+		C66703971D33E823007C8C3D /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
+		C667039A1D33E836007C8C3D /* TimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHelper.h; sourceTree = "<group>"; };
+		C667039B1D33E836007C8C3D /* TimerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerHelper.m; sourceTree = "<group>"; };
 		C6E0E5FA1D336EC200F8CF09 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		C6E0E5FB1D336EC200F8CF09 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		C6E0E5FC1D336EC200F8CF09 /* LoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManager.h; sourceTree = "<group>"; };
@@ -502,6 +506,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C66703951D33E823007C8C3D /* HourGlass */ = {
+			isa = PBXGroup;
+			children = (
+				C66703961D33E823007C8C3D /* FeHourGlass.h */,
+				C66703971D33E823007C8C3D /* FeHourGlass.m */,
+			);
+			path = HourGlass;
+			sourceTree = "<group>";
+		};
+		C66703991D33E836007C8C3D /* TimerHelper */ = {
+			isa = PBXGroup;
+			children = (
+				C667039A1D33E836007C8C3D /* TimerHelper.h */,
+				C667039B1D33E836007C8C3D /* TimerHelper.m */,
+			);
+			path = TimerHelper;
+			sourceTree = "<group>";
+		};
 		C6F5D9451C4FBEEA009240CE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,7 +564,8 @@
 		C6F5D96A1C4FBFCA009240CE /* General */ = {
 			isa = PBXGroup;
 			children = (
-				C6E0E5E01D336C8700F8CF09 /* TimerHelper */,
+				C66703951D33E823007C8C3D /* HourGlass */,
+				C66703991D33E836007C8C3D /* TimerHelper */,
 				3982F3441CB7AB370010D270 /* CustomAlertView */,
 				3982F3471CB7AB370010D270 /* JXTLibrary */,
 				3982F34A1CB7AB370010D270 /* LaunchAd */,
@@ -704,7 +727,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6E0E5E11D336C8700F8CF09 /* TimerHelper in Resources */,
 				3914CC331C4C92DF00CA4B4A /* LaunchScreen.storyboard in Resources */,
 				C6E0E60D1D336F7F00F8CF09 /* cityArea.db in Resources */,
 				399FD29F1C50BA7800E6A936 /* error@2x.png in Resources */,
@@ -796,6 +818,7 @@
 				39D591B31C4E46430022D37A /* BaseNavigationController.m in Sources */,
 				3982F3601CB7AB370010D270 /* NJKWebViewProgress.m in Sources */,
 				3982F3431CB7A6190010D270 /* IPAddress.m in Sources */,
+				C667039C1D33E836007C8C3D /* TimerHelper.m in Sources */,
 				C6E0E6101D33905A00F8CF09 /* NetJson.m in Sources */,
 				3982F35F1CB7AB370010D270 /* YJLanuchAdMonitor.m in Sources */,
 				3982F35C1CB7AB370010D270 /* YJAlertView.m in Sources */,
@@ -808,6 +831,7 @@
 				3914CC251C4C92DF00CA4B4A /* main.m in Sources */,
 				C6F5D97C1C4FBFCA009240CE /* ChineseString.m in Sources */,
 				39DFBF071C605251000F2C88 /* AFNetWorkUtils.m in Sources */,
+				C66703981D33E823007C8C3D /* FeHourGlass.m in Sources */,
 				C6E0E6051D336EC200F8CF09 /* UpdateManager.m in Sources */,
 				C6E0E6031D336EC200F8CF09 /* LoginManager.m in Sources */,
 				C6E0E6041D336EC200F8CF09 /* SQLManager.m in Sources */,

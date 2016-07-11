@@ -75,13 +75,4 @@ static NSString *CellIdentifier = @"CellIdentifier";
  */
 - (NSArray *)noDuplicateListWithadditionList:(NSArray *)addition;
 
-/** 无数据时调用 */
-- (void)noDataShowImage:(NSString *)imageName tipsArray:(NSArray *)tipsArray buttonTitleArray:(NSArray *)titleArray;
-
-/** 有数据时调用 */
-- (void)hidenoDataView;
-
-/** 数据为空显示的按钮操作 */
-@property (nonatomic, copy) void(^buttonClickBlock)(NSString *title);
-
 @end

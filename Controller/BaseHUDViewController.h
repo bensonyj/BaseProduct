@@ -12,7 +12,7 @@
 @interface BaseHUDViewController : BaseViewController
 
 /** 显示hud后隐藏，默认2秒 */
-@property (nonnull, assign) NSTimeInterval delayTime;
+@property (nonatomic, assign) NSTimeInterval delayTime;
 
 /**
  *  在当前页面显示hud
