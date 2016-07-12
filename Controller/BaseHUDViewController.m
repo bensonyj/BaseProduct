@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delayTime = 2.0;
+    self.requestGraceTimeType = NetworkRequestGraceTimeTypeNormal;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +48,9 @@
 
 - (void)showHUD:(NSString *)text
 {
+    if (!text) {
+        text = @"加载中...";
+    }
     [self showHUDInView:text view:self.view];
 }
 
@@ -63,8 +67,28 @@
     }
     
     HUD = [[MBProgressHUD alloc] initWithView:view];
-    HUD.mode = MBProgressHUDModeCustomView;
+//    HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont systemFontOfSize:15];
+    HUD.minShowTime = 0.5;
+    HUD.taskInProgress = YES;
+    
+    NSTimeInterval graceTime = 0;
+    switch (self.requestGraceTimeType) {
+        case NetworkRequestGraceTimeTypeNormal:
+            graceTime = 0.5;
+            break;
+        case NetworkRequestGraceTimeTypeLong:
+            graceTime = 1.0;
+            break;
+        case NetworkRequestGraceTimeTypeShort:
+            graceTime = 0.1;
+            break;
+        case NetworkRequestGraceTimeTypeAlways:
+            graceTime = 0;
+            break;
+    }
+
+    HUD.graceTime = graceTime;
     [view addSubview:HUD];
     if (text){
         HUD.labelText = text;
@@ -115,6 +139,7 @@
 - (void)hideHUD
 {
     loading = NO;
+    HUD.taskInProgress = NO;
     [HUD hide:YES];
     [HUD.customView removeFromSuperview];
     HUD = nil;

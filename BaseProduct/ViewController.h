@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseHUDViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : BaseHUDViewController
 
 
 @end

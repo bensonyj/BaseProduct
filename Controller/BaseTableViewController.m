@@ -42,7 +42,9 @@
             [self removeRefreshFooter];
         }
         else if ([value integerValue] == _perPageCount && [value integerValue]>0){
-            [self configureRefreshFooter:self.header.scrollView];
+            if (self.showFooterView) {
+                [self configureRefreshFooter:self.header.scrollView];
+            }
         }
     }];
 }
@@ -70,6 +72,7 @@
 //刷新数据
 - (void)refreshData
 {
+    [super refreshData];
     switch (_refreshStatus) {
         case refreshType_Normal:
             self.startPage = 1;
@@ -151,11 +154,15 @@
         NSMutableSet *additionSet           = [[NSMutableSet alloc] init];
         NSMutableDictionary *additionMap    = [[NSMutableDictionary alloc] init];
         for (BaseModel *aBrief in self.dataList) {
-            [sourceSet addObject:aBrief.bid];
+            if (aBrief.bid) {
+                [sourceSet addObject:aBrief.bid];
+            }
         }
         for (BaseModel *aBrief in addition) {
-            [additionSet addObject:aBrief.bid];
-            [additionMap setObject:aBrief forKey:aBrief.bid];
+            if (aBrief.bid) {
+                [additionSet addObject:aBrief.bid];
+                [additionMap setObject:aBrief forKey:aBrief.bid];
+            }
         }
         
         [additionSet intersectSet:sourceSet];

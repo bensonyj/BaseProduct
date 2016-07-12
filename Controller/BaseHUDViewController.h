@@ -13,7 +13,8 @@
 
 /** 显示hud后隐藏，默认2秒 */
 @property (nonatomic, assign) NSTimeInterval delayTime;
-
+/** 网络数据加载提示框延时弹出,默认0.5秒 */
+@property (nonatomic, assign) NetworkRequestGraceTimeType requestGraceTimeType;
 /**
  *  在当前页面显示hud
  */

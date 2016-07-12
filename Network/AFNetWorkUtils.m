@@ -141,22 +141,11 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
         return [self getNoNetSignal];
     }
     
-    //判断是否需要显示hud
-    BOOL isNeedHud = YES;
-    if ([url isEqualToString:@""]) {
-        isNeedHud = NO;
-    }
-    
-    url = [kAPIURL stringByAppendingString:url];
-    
+    url = [kAPIURL stringByAppendingString:url];    
     
     NSLog(@"<%@: %p> -postImage2racWthURL: %@, params: %@", self.class, self, url, params);
     
     return [[RACSignal createSignal:^RACDisposable *(id <RACSubscriber> subscriber) {
-        
-        NetworkRequestGraceTimeType type = isNeedHud ? NetworkRequestGraceTimeTypeNormal : NetworkRequestGraceTimeTypeNone;
-        MBProgressHUD *hud = [self hud:type];
-        
         AFHTTPSessionManager *manager = [self sharedHTTPOperationManager];
         
         NSURLSessionDataTask *operation = [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -166,22 +155,13 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
             //            [formData appendPartWithFileData:data name:name fileName:@"file" mimeType:@"image/jpeg"];//给定数据流的数据名，文件名，文件类型（以图片为例）
             [formData appendPartWithFileData:data name:name fileName:@"file" mimeType:@"application/octet-stream"];//给定数据流的数据名，文件名，文件类型（以图片为例）
         } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            hud.taskInProgress = NO;
-            [hud hide:YES];
             
             [self handleResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation responseObject:responseObject];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            // 任务结束，设置状态
-            hud.taskInProgress = NO;
-            [hud hide:YES];
             [self handleErrorResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation error:error];
         }];
         
         return [RACDisposable disposableWithBlock:^{
-            // 任务结束，设置状态
-            hud.taskInProgress = NO;
-            [hud hide:YES];
-            
             [operation cancel];
         }];
     }] setNameWithFormat:@"<%@: %p> -postImage2racWthURL: %@, params: %@", self.class, self, url, params];
@@ -217,35 +197,14 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
     
     NSLog(@"<%@: %p> -post2racWthURL: %@, params: %@", self.class, self, url, params);
     
-    
-    BOOL isNeedHud = YES;
-    if ([url isEqualToString:@""]) {
-        isNeedHud = NO;
-    }
-
     return [[RACSignal createSignal:^RACDisposable *(id <RACSubscriber> subscriber) {
-        NetworkRequestGraceTimeType type = isNeedHud ? NetworkRequestGraceTimeTypeNormal : NetworkRequestGraceTimeTypeNone;
-        // 获取转圈控件,默认若是0.5秒数据返回则不显示转圈
-        MBProgressHUD *hud = [self hud:type];
-        
         AFHTTPSessionManager *manager = [self sharedHTTPOperationManager];
         NSURLSessionDataTask *operation = [manager POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-            // 任务结束，设置状态
-            hud.taskInProgress = NO;
-            [hud hide:YES];
-            
             [self handleResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation responseObject:responseObject];
         }                                         failure:^(NSURLSessionDataTask *operation, NSError *error) {
-            // 任务结束，设置状态
-            hud.taskInProgress = NO;
-            [hud hide:YES];
             [self handleErrorResultWithSubscriber:(id <RACSubscriber>) subscriber operation:operation error:error];
         }];
         return [RACDisposable disposableWithBlock:^{
-            // 任务结束，设置状态
-            hud.taskInProgress = NO;
-            [hud hide:YES];
-            
             [operation cancel];
         }];
     }] setNameWithFormat:@"<%@: %p> -post2racWthURL: %@, params: %@", self.class, self, url, params];
@@ -396,130 +355,6 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetWorkUtils)
 + (NSString *)errorMessage:(NSError *)error
 {
     return [error.userInfo objectForKey:customErrorInfoKey];
-}
-
-#pragma mark - hud延时弹框
-
-+ (MBProgressHUD *)hud:(NetworkRequestGraceTimeType)graceTimeType{
-    NSTimeInterval graceTime = 0;
-    switch (graceTimeType) {
-        case NetworkRequestGraceTimeTypeNone:
-            return nil;
-            break;
-        case NetworkRequestGraceTimeTypeNormal:
-            graceTime = 0.5;
-            break;
-        case NetworkRequestGraceTimeTypeLong:
-            graceTime = 1.0;
-            break;
-        case NetworkRequestGraceTimeTypeShort:
-            graceTime = 0.1;
-            break;
-        case NetworkRequestGraceTimeTypeAlways:
-            graceTime = 0;
-            break;
-    }
-    
-    MBProgressHUD *hud = [self hud];
-    [kLastWindow addSubview:hud];
-    hud.graceTime = graceTime;
-    
-    // 设置该属性，graceTime才能生效
-    hud.taskInProgress = YES;
-    [hud show:YES];
-    
-    return hud;
-}
-
-// 网络请求频率很高，不必每次都创建\销毁一个hud，只需创建一个反复使用即可
-+ (MBProgressHUD *)hud{
-    MBProgressHUD *hud = objc_getAssociatedObject(self, _cmd);
-    
-    if (!hud) {
-        // 参数kLastWindow仅仅是用到了其CGFrame，并没有将hud添加到上面
-        hud = [[MBProgressHUD alloc] initWithWindow:kLastWindow];
-        hud.labelText = @"加载中...";
-        
-        objc_setAssociatedObject(self, _cmd, hud, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
-        NSLog(@"创建了一个HUD");
-    }
-    return hud;
-}
-
-
-#pragma mark 显示信息
-+ (void)show:(NSString *)text view:(UIView *)view
-{
-    if (!view){
-        view = [[UIApplication sharedApplication].windows lastObject];
-    }
-    // 快速显示一个提示信息
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.detailsLabelText = text;
-    // 再设置模式
-    hud.mode = MBProgressHUDModeCustomView;
-    
-    // 隐藏时候从父控件中移除
-    hud.removeFromSuperViewOnHide = YES;
-    
-    // 1秒之后再消失
-    [hud hide:YES afterDelay:1];
-}
-
-static NSString *const KAlwaysHUDKey = @"KAlwaysHUDKey";
-
-+ (void)showAlways:(NSString *)text toView:(UIView *)view
-{
-    MBProgressHUD *hud = objc_getAssociatedObject(self, &KAlwaysHUDKey);
-    if (!hud) {
-        if (!view){
-            view = [[UIApplication sharedApplication].windows lastObject];
-        }
-        hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-        hud.removeFromSuperViewOnHide = NO;
-        objc_setAssociatedObject(self, &KAlwaysHUDKey, hud, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
-        NSLog(@"创建了一个KAlwaysHUDKey");
-    }
-    hud.labelText = text;
-    
-    [hud show:YES];
-}
-
-+ (void)hide
-{
-    MBProgressHUD *hud = objc_getAssociatedObject(self, &KAlwaysHUDKey);
-    if (hud) {
-        hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
-        objc_setAssociatedObject(self, &KAlwaysHUDKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        NSLog(@"KAlwaysHUDKey被移除");
-    }else{
-        NSLog(@"hud还未创建");
-    }
-}
-
-+ (MBProgressHUD *)showAlways:(NSString *)text view:(UIView *)view
-{
-    if (!view){
-        view = [[UIApplication sharedApplication].windows lastObject];
-    }
-    // 快速显示一个提示信息
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = text;
-    // 再设置模式
-    hud.mode = MBProgressHUDModeIndeterminate;
-    
-    // 隐藏时候从父控件中移除
-    hud.removeFromSuperViewOnHide = YES;
-    
-    return hud;
-}
-
-+ (void)hideHUDForView:(UIView *)view
-{
-    [MBProgressHUD hideHUDForView:view animated:YES];
 }
 
 @end

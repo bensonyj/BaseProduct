@@ -6,20 +6,20 @@
 //  Copyright © 2016年 yingjian. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseHUDViewController.h"
 #import "MJRefresh.h"
 
 static NSString *CellIdentifier = @"CellIdentifier";
 
 
 
-@interface BaseTableViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
+@interface BaseTableViewController : BaseHUDViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 /** 当前视图数组 */
 @property (nonatomic, strong) NSMutableArray *dataList;
 
-/** 下拉刷新 */
+/** 下拉刷新,默认添加判断接收数据添加上拉加载控件，可通过showFooterView控制是否显示 */
 @property (nonatomic, strong) MJRefreshNormalHeader *header;
 /** 上拉加载 */
 @property (nonatomic, strong) MJRefreshAutoNormalFooter *footer;
@@ -71,7 +71,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
  *
  *  @param addition 网络获得的数组
  *
- *  @return 去重的数组
+ *  @return 去重的数组,根据model基类的bid判断
  */
 - (NSArray *)noDuplicateListWithadditionList:(NSArray *)addition;
 

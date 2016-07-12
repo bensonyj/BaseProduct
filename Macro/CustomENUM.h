@@ -16,4 +16,12 @@ typedef NS_ENUM(NSUInteger,RefreshType) {
     refreshType_PullDown    ///< 上拉加载
 };
 
+/** 网络提示框的出现时机，若干秒后网络数据还未返回则出现提示框 */
+typedef NS_ENUM(NSUInteger, NetworkRequestGraceTimeType){
+    NetworkRequestGraceTimeTypeNormal,  // 0.5s
+    NetworkRequestGraceTimeTypeLong,    // 1s
+    NetworkRequestGraceTimeTypeShort,   // 0.1s
+    NetworkRequestGraceTimeTypeAlways   // 总是有提示框
+};
+
 #endif /* CustomENUM_h */

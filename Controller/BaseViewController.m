@@ -11,9 +11,8 @@
 #import "FeHourGlass.h"
 
 @interface BaseViewController ()
-{
-    FeHourGlass *loadingView;
-}
+
+@property (nonatomic, strong) FeHourGlass *loadingView;
 
 @property (nonatomic, strong) UIView *notNetView;
 
@@ -63,7 +62,6 @@
 
 - (void)dealloc
 {
-    loadingView = nil;
     NSLog(@"正常释放dealloc:%@",NSStringFromClass([self class]));
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -121,15 +119,29 @@
 
 - (void)showDataLoadingView
 {
-    loadingView = [[FeHourGlass alloc] initWithView:self.view anmationColor:nil];
-    [self.view addSubview:loadingView];
+    if (!_loadingView) {
+        [self.view addSubview:self.loadingView];
+    }
     
-    [loadingView show];
+    [_loadingView show];
 }
 
 - (void)dismissDataLoadingView
 {
-    [loadingView dismiss];
+    if (_loadingView) {
+        [_loadingView dismiss];
+        [_loadingView removeFromSuperview];
+    }
+    _loadingView = nil;
+}
+
+- (FeHourGlass *)loadingView
+{
+    if (!_loadingView) {
+        _loadingView = [[FeHourGlass alloc] initWithView:self.view anmationColor:nil];
+    }
+    
+    return _loadingView;
 }
 
 #pragma mark - 内容为空处理
@@ -235,7 +247,8 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_notNetView addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(_notNetView);
+        make.centerX.equalTo(_notNetView.mas_centerX);
+        make.centerY.equalTo(_notNetView.mas_centerY).offset(-40);
     }];
     
     UILabel *tipLabel = [[UILabel alloc] init];
@@ -262,6 +275,7 @@
     [_notNetView addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@100);
+        make.height.mas_equalTo(20);
         make.centerX.equalTo(_notNetView.mas_centerX);
         make.top.equalTo(tipLabel.mas_bottom).offset(10);
     }];
@@ -297,7 +311,8 @@
 #pragma mark - 获取数据
 - (void)refreshData
 {
-    
+    [self dismissNotNetView];
+    [self hideNoDataView];
 }
 
 #pragma mark - Navigation

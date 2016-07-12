@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BaseNavigationController.h"
 #import "NSString+BeeExtension.h"
+#import "JXTAlertTools.h"
+#import "UIView+Utils.h"
+#import "UIImage+SCAddition.h"
+#import "AFNetWorkUtils.h"
+#import "LoginManager.h"
 
 @interface BaseViewController : UIViewController
 {

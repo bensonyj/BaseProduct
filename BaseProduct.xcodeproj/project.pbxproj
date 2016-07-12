@@ -24,7 +24,6 @@
 		3982F3601CB7AB370010D270 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982F3521CB7AB370010D270 /* NJKWebViewProgress.m */; };
 		3982F3611CB7AB370010D270 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982F3541CB7AB370010D270 /* NJKWebViewProgressView.m */; };
 		3982F3621CB7AB370010D270 /* RxWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982F3561CB7AB370010D270 /* RxWebViewController.m */; };
-		3982F3641CB7AB370010D270 /* TimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982F35B1CB7AB370010D270 /* TimerHelper.m */; };
 		399FD28B1C507E8B00E6A936 /* NSArray+SCAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 399FD2881C507E8B00E6A936 /* NSArray+SCAddition.m */; };
 		399FD28C1C507E8B00E6A936 /* NSDictionary+SCAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 399FD28A1C507E8B00E6A936 /* NSDictionary+SCAddition.m */; };
 		399FD28F1C50881A00E6A936 /* UIDevice+SCAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 399FD28E1C50881A00E6A936 /* UIDevice+SCAddition.m */; };
@@ -122,8 +121,6 @@
 		3982F3541CB7AB370010D270 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 		3982F3551CB7AB370010D270 /* RxWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxWebViewController.h; sourceTree = "<group>"; };
 		3982F3561CB7AB370010D270 /* RxWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewController.m; sourceTree = "<group>"; };
-		3982F35A1CB7AB370010D270 /* TimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHelper.h; sourceTree = "<group>"; };
-		3982F35B1CB7AB370010D270 /* TimerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerHelper.m; sourceTree = "<group>"; };
 		399FD2871C507E8B00E6A936 /* NSArray+SCAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SCAddition.h"; sourceTree = "<group>"; };
 		399FD2881C507E8B00E6A936 /* NSArray+SCAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SCAddition.m"; sourceTree = "<group>"; };
 		399FD2891C507E8B00E6A936 /* NSDictionary+SCAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SCAddition.h"; sourceTree = "<group>"; };
@@ -380,15 +377,6 @@
 			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
-		3982F3591CB7AB370010D270 /* TimerHelper */ = {
-			isa = PBXGroup;
-			children = (
-				3982F35A1CB7AB370010D270 /* TimerHelper.h */,
-				3982F35B1CB7AB370010D270 /* TimerHelper.m */,
-			);
-			path = TimerHelper;
-			sourceTree = "<group>";
-		};
 		399FD2991C50BA7800E6A936 /* TextFieldValidator */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,7 +558,6 @@
 				3982F3471CB7AB370010D270 /* JXTLibrary */,
 				3982F34A1CB7AB370010D270 /* LaunchAd */,
 				3982F34F1CB7AB370010D270 /* RxWebView */,
-				3982F3591CB7AB370010D270 /* TimerHelper */,
 				399FD2991C50BA7800E6A936 /* TextFieldValidator */,
 				C6F5D96B1C4FBFCA009240CE /* AutoScrollView */,
 				C6F5D96E1C4FBFCA009240CE /* ChineseSorting */,
@@ -825,7 +812,6 @@
 				399FD28C1C507E8B00E6A936 /* NSDictionary+SCAddition.m in Sources */,
 				C6F5D9671C4FBEEA009240CE /* UITabBarController+HideTabBar.m in Sources */,
 				C6E0E6081D336ECA00F8CF09 /* UserInfo.m in Sources */,
-				3982F3641CB7AB370010D270 /* TimerHelper.m in Sources */,
 				C6E0E6131D33B14E00F8CF09 /* BaseHUDViewController.m in Sources */,
 				3982F35D1CB7AB370010D270 /* JXTAlertTools.m in Sources */,
 				3914CC251C4C92DF00CA4B4A /* main.m in Sources */,

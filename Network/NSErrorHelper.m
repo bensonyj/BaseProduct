@@ -32,7 +32,7 @@ NSString *const errorHelperDomain = @"http://NSErrorHelper";
             result = @"服务器内部错误";
             break;
         case kCFURLErrorNetworkConnectionLost: //-1005
-            result = @"网络连接已中断";
+            result = @"服务器连接已中断";
             break;
         default:
             result = @"其他错误";
