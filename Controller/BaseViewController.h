@@ -22,6 +22,8 @@
 
 /** 无数据时button事件 */
 @property (nonatomic, copy) void(^buttonClick)(NSString *title);
+///** 需要在viewWillDisappear销毁信号的 */
+//@property (nonatomic, strong) NSMutableArray *disposes;
 
 - (void)customBackBarButtonItem;
 - (void)backBarButtonItemClick:(UIBarButtonItem *)barItem;

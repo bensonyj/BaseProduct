@@ -54,6 +54,16 @@
     [self customBackBarButtonItem];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+//    for (RACDisposable *disposable in self.disposes) {
+//        if ([disposable isKindOfClass:[RACDisposable class]]) {
+//            [disposable dispose];
+//        }
+//    }
+}
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
