@@ -44,6 +44,7 @@
 		39DFBF081C605251000F2C88 /* NSErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DFBF061C605251000F2C88 /* NSErrorHelper.m */; };
 		C66703981D33E823007C8C3D /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66703971D33E823007C8C3D /* FeHourGlass.m */; };
 		C667039C1D33E836007C8C3D /* TimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C667039B1D33E836007C8C3D /* TimerHelper.m */; };
+		C6AF04BC1EA336FE0009E159 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6AF04BB1EA336FE0009E159 /* BaseCollectionViewController.m */; };
 		C6E0E6021D336EC200F8CF09 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FB1D336EC200F8CF09 /* LocationManager.m */; };
 		C6E0E6031D336EC200F8CF09 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FD1D336EC200F8CF09 /* LoginManager.m */; };
 		C6E0E6041D336EC200F8CF09 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E0E5FF1D336EC200F8CF09 /* SQLManager.m */; };
@@ -167,6 +168,8 @@
 		C66703971D33E823007C8C3D /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
 		C667039A1D33E836007C8C3D /* TimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHelper.h; sourceTree = "<group>"; };
 		C667039B1D33E836007C8C3D /* TimerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerHelper.m; sourceTree = "<group>"; };
+		C6AF04BA1EA336FE0009E159 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
+		C6AF04BB1EA336FE0009E159 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewController.m; sourceTree = "<group>"; };
 		C6E0E5FA1D336EC200F8CF09 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		C6E0E5FB1D336EC200F8CF09 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		C6E0E5FC1D336EC200F8CF09 /* LoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManager.h; sourceTree = "<group>"; };
@@ -405,10 +408,12 @@
 				39D591B21C4E46430022D37A /* BaseNavigationController.m */,
 				39D591B41C4E46BF0022D37A /* BaseViewController.h */,
 				39D591B51C4E46BF0022D37A /* BaseViewController.m */,
-				39D591B71C4F1F110022D37A /* BaseTableViewController.h */,
-				39D591B81C4F1F110022D37A /* BaseTableViewController.m */,
 				C6E0E6111D33B14E00F8CF09 /* BaseHUDViewController.h */,
 				C6E0E6121D33B14E00F8CF09 /* BaseHUDViewController.m */,
+				39D591B71C4F1F110022D37A /* BaseTableViewController.h */,
+				39D591B81C4F1F110022D37A /* BaseTableViewController.m */,
+				C6AF04BA1EA336FE0009E159 /* BaseCollectionViewController.h */,
+				C6AF04BB1EA336FE0009E159 /* BaseCollectionViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -811,6 +816,7 @@
 				3982F35C1CB7AB370010D270 /* YJAlertView.m in Sources */,
 				399FD28C1C507E8B00E6A936 /* NSDictionary+SCAddition.m in Sources */,
 				C6F5D9671C4FBEEA009240CE /* UITabBarController+HideTabBar.m in Sources */,
+				C6AF04BC1EA336FE0009E159 /* BaseCollectionViewController.m in Sources */,
 				C6E0E6081D336ECA00F8CF09 /* UserInfo.m in Sources */,
 				C6E0E6131D33B14E00F8CF09 /* BaseHUDViewController.m in Sources */,
 				3982F35D1CB7AB370010D270 /* JXTAlertTools.m in Sources */,

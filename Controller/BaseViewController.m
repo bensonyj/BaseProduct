@@ -27,14 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.00){
-        topHeight = 64;
-    }
-    else{
-        topHeight = 0;
-    }
-    
+        
     //设置主背景色
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -58,11 +51,11 @@
 {
     [super viewWillDisappear:animated];
     [self.view endEditing:YES];
-//    for (RACDisposable *disposable in self.disposes) {
-//        if ([disposable isKindOfClass:[RACDisposable class]]) {
-//            [disposable dispose];
-//        }
-//    }
+    for (RACDisposable *disposable in self.disposes) {
+        if ([disposable isKindOfClass:[RACDisposable class]]) {
+            [disposable dispose];
+        }
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle

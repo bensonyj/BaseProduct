@@ -1,21 +1,20 @@
 //
-//  BaseTableViewController.m
-//  BaseProduct
+//  BaseCollectionViewController.m
+//  CattleAutoParts
 //
-//  Created by yj on 16/1/20.
+//  Created by 应剑 on 16/8/10.
 //  Copyright © 2016年 yingjian. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
-#import "BaseModel.h"
+#import "BaseCollectionViewController.h"
 
-@interface BaseTableViewController ()
+@interface BaseCollectionViewController ()
 
 @property (assign, nonatomic) BOOL isMore; ///< 是否还有更多数据
 
 @end
 
-@implementation BaseTableViewController
+@implementation BaseCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,8 +24,8 @@
     self.refreshStatus = refreshType_Normal;
 //    self.showFooterView = YES;
 //    self.dataList = [NSMutableArray array];
-    self.tableView.backgroundColor = self.view.backgroundColor;
-    self.tableView.backgroundView = nil;
+    self.collectionView.backgroundColor = self.view.backgroundColor;
+    self.collectionView.backgroundView = nil;
     
 //    //设置默认加载条数
 //    self.perPageCount = 15;
@@ -37,13 +36,13 @@
     @weakify(self);
     [RACObserve(self, receiveCount) subscribeNext:^(NSNumber *value) {
         @strongify(self);
-        if([value integerValue] < _perPageCount){
+        if([value integerValue] < self.perPageCount){
             //没有更多
             [self removeRefreshFooter];
         }
-        else if ([value integerValue] == _perPageCount && [value integerValue]>0){
+        else if ([value integerValue] == self.perPageCount && [value integerValue]>0){
             if (self.showFooterView) {
-                [self configureRefreshFooter:self.tableView];
+                [self configureRefreshFooter:self.header.scrollView];
             }
         }
     }];
@@ -73,17 +72,17 @@
     return _dataList;
 }
 
-- (void)configureRefreshHeader:(UIScrollView *)tableView
+- (void)configureRefreshHeader:(UIScrollView *)collectionView
 {
-    tableView.mj_header = self.header;
+    collectionView.mj_header = self.header;
 }
 
-- (void)configureRefreshFooter:(UIScrollView *)tableView
+- (void)configureRefreshFooter:(UIScrollView *)collectionView
 {
     self.startPage ++;
     self.isMore = YES;
     
-    tableView.mj_footer = self.footer;
+    collectionView.mj_footer = self.footer;
     _footer.hidden = NO;
 }
 
@@ -148,7 +147,7 @@
         // 隐藏时间
         _header.lastUpdatedTimeLabel.hidden = YES;
     }
-
+    
     return _header;
 }
 
@@ -163,7 +162,7 @@
             [self refreshData];
         }];
     }
-
+    
     return _footer;
 }
 
@@ -203,21 +202,18 @@
     }
 }
 
-#pragma mark - UITableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - UICollectionView
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
 
 - (void)dealloc
 {
