@@ -13,7 +13,7 @@ static NSString *CollectionCellIdentifier = @"CollectionCellIdentifier";
 
 @interface BaseCollectionViewController : BaseHUDViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 /** 当前视图数组 */
 @property (nonatomic, strong) NSMutableArray *dataList;
 
@@ -72,5 +72,10 @@ static NSString *CollectionCellIdentifier = @"CollectionCellIdentifier";
  *  @return 去重的数组,根据model基类的bid判断
  */
 - (NSArray *)noDuplicateListWithadditionList:(NSArray *)addition;
+
+/**
+ *  @brief  设置 flowlayout
+ */
+- (UICollectionViewFlowLayout *)setupFlowLayout;
 
 @end

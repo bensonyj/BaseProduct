@@ -66,4 +66,10 @@
  */
 - (void)hideNoDataView;
 
+/**
+ *  @brief  点击空白处隐藏键盘
+ */
+- (void)setupTapHiddenKeyboardGesture;
+
+
 @end

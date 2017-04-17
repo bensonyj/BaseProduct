@@ -15,7 +15,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 @interface BaseTableViewController : BaseHUDViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 /** 当前视图数组 */
 @property (nonatomic, strong) NSMutableArray *dataList;
 
@@ -74,5 +74,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
  *  @return 去重的数组,根据model基类的bid判断
  */
 - (NSArray *)noDuplicateListWithadditionList:(NSArray *)addition;
+
+/**
+ *  @brief  table style
+ */
+- (UITableViewStyle)setupTableStyle;
 
 @end

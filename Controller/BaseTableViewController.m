@@ -33,6 +33,11 @@
 //    //开始加载数据页码
 //    self.startPage = 1;
     
+    [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsZero);
+    }];
+    
     //判断当前数量
     @weakify(self);
     [RACObserve(self, receiveCount) subscribeNext:^(NSNumber *value) {
@@ -41,7 +46,7 @@
             //没有更多
             [self removeRefreshFooter];
         }
-        else if ([value integerValue] == _perPageCount && [value integerValue]>0){
+        else if ([value integerValue] == _perPageCount && [value integerValue] > 0){
             if (self.showFooterView) {
                 [self configureRefreshFooter:self.tableView];
             }
@@ -62,15 +67,6 @@
 - (NSInteger)perPageCount
 {
     return 10;
-}
-
-- (NSMutableArray *)dataList
-{
-    if (!_dataList) {
-        _dataList = [NSMutableArray array];
-    }
-    
-    return _dataList;
 }
 
 - (void)configureRefreshHeader:(UIScrollView *)tableView
@@ -217,6 +213,79 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = tableView.backgroundColor;
+    
+    return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = tableView.backgroundColor;
+    
+    return view;
+}
+
+- (UITableViewStyle)setupTableStyle
+{
+    return UITableViewStyleGrouped;
+}
+
+#pragma mark - 点击空白处隐藏键盘
+
+- (void)setupTapHiddenKeyboardGesture
+{
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] init];
+    gesture.numberOfTapsRequired = 1;
+    gesture.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gesture];
+    @weakify(self);
+    [gesture.rac_gestureSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self.view endEditing:YES];
+    }];
+}
+
+
+#pragma mark - lazy
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:[self setupTableStyle]];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+        _tableView.backgroundColor = self.view.backgroundColor;
+        _tableView.backgroundView = nil;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorColor = kDividingLineColor;
+    }
+    
+    return _tableView;
+}
+
+- (NSMutableArray *)dataList
+{
+    if (!_dataList) {
+        _dataList = [NSMutableArray array];
+    }
+    
+    return _dataList;
 }
 
 - (void)dealloc

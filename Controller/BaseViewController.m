@@ -35,6 +35,9 @@
     self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 100;
 
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+    
+    // 隐藏键盘
+//    [self setupTapHiddenKeyboardGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -309,6 +312,18 @@
     if (self.buttonClick) {
         self.buttonClick(button.currentTitle);
     }
+}
+
+- (void)setupTapHiddenKeyboardGesture
+{
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] init];
+    gesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gesture];
+    @weakify(self);
+    [gesture.rac_gestureSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self.view endEditing:YES];
+    }];
 }
 
 #pragma mark - 获取数据

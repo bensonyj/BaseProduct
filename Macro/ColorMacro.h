@@ -57,6 +57,9 @@
 
 #define COLOR_Z [UIColor clearColor]
 
+/** 分割线用色 (浅灰) */
+#define kDividingLineColor          HexRGB(0xe5e5e5)
+
 
 #define COLOR_CB(x) [UIColor colorWithRed:40 / 255. green:161 / 255. blue:216 / 255. alpha:x]
 #define COLOR_A2 [UIColor colorWithRed:255 / 255. green:255 / 255. blue:255 / 255. alpha:.5]

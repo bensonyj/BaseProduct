@@ -42,7 +42,7 @@
         }
         else if ([value integerValue] == self.perPageCount && [value integerValue]>0){
             if (self.showFooterView) {
-                [self configureRefreshFooter:self.header.scrollView];
+                [self configureRefreshFooter:self.collectionView];
             }
         }
     }];
@@ -204,25 +204,130 @@
 
 #pragma mark - UICollectionView
 
+//返回section个数
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+//定义展示的UICollectionViewCell的个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 0;
 }
 
+//每个UICollectionView展示的内容
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
 
+//定义每个UICollectionView 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
+        return layout.itemSize;
+    }
+    
+    CGFloat width = ceilf((SCREEN_WIDTH - 15) / 2.0);
+    CGFloat hieght = ceilf(240 * (width / 180.0));
+    return CGSizeMake(width, hieght);
+}
+
+//设置每个item的UIEdgeInsets
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    if ([collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
+        return layout.sectionInset;
+    }
+    return UIEdgeInsetsMake(10, 5, 10, 0);
+}
+
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+//header的size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeZero;
+}
+
+//footer的size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return CGSizeZero;
+}
+
+//通过设置SupplementaryViewOfKind 来设置头部或者底部的view，其中 ReuseIdentifier 的值必须和 注册是填写的一致，本例都为 “reusableView”
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return nil;
+}
+
+//点击item方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - lazy
+
+- (UICollectionViewFlowLayout *)setupFlowLayout
+{
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+    return flowLayout;
+}
+
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[self setupFlowLayout]];
+        _collectionView.backgroundColor = self.view.backgroundColor;
+        _collectionView.backgroundView = nil;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+    }
+    
+    return _collectionView;
+}
+
+#pragma mark - 点击空白处隐藏键盘
+
+- (void)setupTapHiddenKeyboardGesture
+{
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] init];
+    gesture.numberOfTapsRequired = 1;
+    gesture.cancelsTouchesInView = NO;
+    [self.collectionView addGestureRecognizer:gesture];
+    @weakify(self);
+    [gesture.rac_gestureSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self.view endEditing:YES];
+    }];
+}
+
+#pragma mark - dealloc
 
 - (void)dealloc
 {
     NSLog(@"table正常释放dealloc:%@",NSStringFromClass([self class]));
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
