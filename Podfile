@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target "BaseProduct" do
@@ -11,7 +11,6 @@ target "BaseProduct" do
     pod 'MJExtension'
     pod 'pop'
     pod 'FMDB'
-    pod 'FDFullscreenPopGesture'
     pod 'MJRefresh'
-    pod 'IQKeyboardManager','~>3.3.4’
+    pod 'IQKeyboardManager'
 end

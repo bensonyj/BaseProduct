@@ -10,7 +10,6 @@
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
 #import <WebKit/WebKit.h>
-#import "UINavigationController+FDFullscreenPopGesture.h"
 
 #define boundsWidth self.view.bounds.size.width
 #define boundsHeight self.view.bounds.size.height
@@ -91,7 +90,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.leftBarButtonItem = self.customBackBarItem;
-    self.fd_interactivePopDisabled = NO;
     
     self.isCanPopGestureRecognizer = YES;
     self.isCanReload = YES;
@@ -302,8 +300,6 @@
                     [self.realWebView addGestureRecognizer:self.swipePanGesture];
                 }
             }
-            
-            self.fd_interactivePopDisabled = YES;
         }
         
         //弃用customBackBarItem，使用原生backButtonItem
@@ -312,8 +308,6 @@
         if (_usingUIWebView) {
             [self.realWebView removeGestureRecognizer:self.swipePanGesture];
         }
-        
-        self.fd_interactivePopDisabled = NO;
         
         [self.navigationItem setLeftBarButtonItems:@[spaceButtonItem,self.customBackBarItem] animated:NO];
     }

@@ -24,6 +24,9 @@
     
     self.navigationBar.translucent = NO;
 
+    // 默认可返回
+    self.canDragBack = YES;
+
     //设置导航栏颜色、字体
 //    self.view.backgroundColor = HexRGB(0xeeeeee);
 //    self.navigationBar.barStyle = UIStatusBarStyleDefault;
@@ -44,10 +47,18 @@
     return NO;
 }
 
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.viewControllers.count > 0) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
+
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if (self.navigationController.viewControllers.count == 1)
+    if (self.viewControllers.count <= 1 || !self.canDragBack)
     {
         return NO;
     }

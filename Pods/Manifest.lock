@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - FDFullscreenPopGesture (1.1)
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
@@ -38,9 +37,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - FDFullscreenPopGesture
   - FMDB
-  - IQKeyboardManager (~> 3.3.4)
+  - IQKeyboardManager
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -52,7 +50,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   IQKeyboardManager: 128bcb96b3ec03ff87942cdd7fa7f44491aa3d08
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
@@ -64,6 +61,6 @@ SPEC CHECKSUMS:
   SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
-PODFILE CHECKSUM: 9a2b147ba7876024853facd2b86c6d8d1c7a17b1
+PODFILE CHECKSUM: dc08d0204aec8ff9c672bd949f9216be3e1ef31e
 
-COCOAPODS: 1.0.0.beta.3
+COCOAPODS: 1.2.0

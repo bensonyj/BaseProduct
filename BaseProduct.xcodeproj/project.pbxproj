@@ -42,6 +42,8 @@
 		39D591B91C4F1F110022D37A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D591B81C4F1F110022D37A /* BaseTableViewController.m */; };
 		39DFBF071C605251000F2C88 /* AFNetWorkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DFBF041C605251000F2C88 /* AFNetWorkUtils.m */; };
 		39DFBF081C605251000F2C88 /* NSErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DFBF061C605251000F2C88 /* NSErrorHelper.m */; };
+		C606C38E1F3AD8700089186C /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = C606C38D1F3AD8700089186C /* UIViewController+Alert.m */; };
+		C606C3911F3AD87D0089186C /* UIResponder+Router.m in Sources */ = {isa = PBXBuildFile; fileRef = C606C3901F3AD87D0089186C /* UIResponder+Router.m */; };
 		C66703981D33E823007C8C3D /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66703971D33E823007C8C3D /* FeHourGlass.m */; };
 		C667039C1D33E836007C8C3D /* TimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C667039B1D33E836007C8C3D /* TimerHelper.m */; };
 		C6AF04BC1EA336FE0009E159 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6AF04BB1EA336FE0009E159 /* BaseCollectionViewController.m */; };
@@ -164,6 +166,10 @@
 		5ABD3A01D9B20A4282995257 /* Pods-BaseProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProduct/Pods-BaseProduct.release.xcconfig"; sourceTree = "<group>"; };
 		6F5384714F3C2B767443CD32 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE23F72AF9321C9121695033 /* libPods-BaseProduct.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseProduct.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C606C38C1F3AD8700089186C /* UIViewController+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
+		C606C38D1F3AD8700089186C /* UIViewController+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
+		C606C38F1F3AD87D0089186C /* UIResponder+Router.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Router.h"; sourceTree = "<group>"; };
+		C606C3901F3AD87D0089186C /* UIResponder+Router.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+Router.m"; sourceTree = "<group>"; };
 		C66703961D33E823007C8C3D /* FeHourGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeHourGlass.h; sourceTree = "<group>"; };
 		C66703971D33E823007C8C3D /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
 		C667039A1D33E836007C8C3D /* TimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHelper.h; sourceTree = "<group>"; };
@@ -397,6 +403,8 @@
 				C6F5D9451C4FBEEA009240CE /* Extension */,
 				399FD2931C50B7AB00E6A936 /* SpecialFunctions.h */,
 				399FD2941C50B7AB00E6A936 /* SpecialFunctions.m */,
+				C606C38F1F3AD87D0089186C /* UIResponder+Router.h */,
+				C606C3901F3AD87D0089186C /* UIResponder+Router.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -550,6 +558,8 @@
 				C6F5D95D1C4FBEEA009240CE /* UIView+Utils.m */,
 				399FD2A71C50C5C200E6A936 /* UIButton+SCAddition.h */,
 				399FD2A81C50C5C200E6A936 /* UIButton+SCAddition.m */,
+				C606C38C1F3AD8700089186C /* UIViewController+Alert.h */,
+				C606C38D1F3AD8700089186C /* UIViewController+Alert.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -619,12 +629,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3914CC4D1C4C92DF00CA4B4A /* Build configuration list for PBXNativeTarget "BaseProduct" */;
 			buildPhases = (
-				141A6334EF3B0669DCAEC38B /* Check Pods Manifest.lock */,
+				141A6334EF3B0669DCAEC38B /* [CP] Check Pods Manifest.lock */,
 				3914CC1C1C4C92DF00CA4B4A /* Sources */,
 				3914CC1D1C4C92DF00CA4B4A /* Frameworks */,
 				3914CC1E1C4C92DF00CA4B4A /* Resources */,
-				6D9E30009408E645A2892259 /* Embed Pods Frameworks */,
-				F30B4847D1947761CD63D889 /* Copy Pods Resources */,
+				6D9E30009408E645A2892259 /* [CP] Embed Pods Frameworks */,
+				F30B4847D1947761CD63D889 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -745,29 +755,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		141A6334EF3B0669DCAEC38B /* Check Pods Manifest.lock */ = {
+		141A6334EF3B0669DCAEC38B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6D9E30009408E645A2892259 /* Embed Pods Frameworks */ = {
+		6D9E30009408E645A2892259 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -775,14 +785,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProduct/Pods-BaseProduct-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F30B4847D1947761CD63D889 /* Copy Pods Resources */ = {
+		F30B4847D1947761CD63D889 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -833,10 +843,12 @@
 				39D591B61C4E46BF0022D37A /* BaseViewController.m in Sources */,
 				39DFBF081C605251000F2C88 /* NSErrorHelper.m in Sources */,
 				399FD2951C50B7AB00E6A936 /* SpecialFunctions.m in Sources */,
+				C606C38E1F3AD8700089186C /* UIViewController+Alert.m in Sources */,
 				39D591B91C4F1F110022D37A /* BaseTableViewController.m in Sources */,
 				C6F5D9601C4FBEEA009240CE /* NSNull+InternalNullExtention.m in Sources */,
 				C6F5D95F1C4FBEEA009240CE /* NSDate+BeeExtension.m in Sources */,
 				C6F5D97E1C4FBFCA009240CE /* QRCodeGenerator.m in Sources */,
+				C606C3911F3AD87D0089186C /* UIResponder+Router.m in Sources */,
 				399FD2A91C50C5C200E6A936 /* UIButton+SCAddition.m in Sources */,
 				C6F5D9801C4FBFCA009240CE /* TQStarRatingView.m in Sources */,
 				3982F3611CB7AB370010D270 /* NJKWebViewProgressView.m in Sources */,
@@ -992,7 +1004,7 @@
 				GCC_PREFIX_HEADER = BaseProduct/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BaseProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1013,7 +1025,7 @@
 				GCC_PREFIX_HEADER = BaseProduct/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BaseProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

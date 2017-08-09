@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "UINavigationController+FDFullscreenPopGesture.h"
 #import "FeHourGlass.h"
 
 @interface BaseViewController ()
@@ -31,9 +30,6 @@
     //设置主背景色
     self.view.backgroundColor = [UIColor whiteColor];
     
-    //设置左滑手势滑动范围
-    self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 100;
-
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     
     // 隐藏键盘
